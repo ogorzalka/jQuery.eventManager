@@ -21,10 +21,8 @@
         for (globalSelector_p in events) {
           if ($(this).is(globalSelector_p)) {
             for (selector_p in events[globalSelector_p][e.type]) {
-            var that = this,
-                $this = $(this);
-            if (($this.is(selector_p) || selector_p == 'default') && typeof events[globalSelector_p][e.type][selector_p] != 'undefined')
-              events[globalSelector_p][e.type][selector_p](that,e,$global);
+              if (($(this).is(selector_p) || selector_p == 'default') && typeof events[globalSelector_p][e.type][selector_p] != 'undefined')
+                events[globalSelector_p][e.type][selector_p](this, e, $global);
             }
           }
         }
