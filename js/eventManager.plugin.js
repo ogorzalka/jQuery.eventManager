@@ -1,9 +1,9 @@
 ;(function($) {
-   // event manager let you organize your javascript events by using the power of the delegate method
+   // Event Manager lets you organize your javascript events by using the power of the delegate method
    $.fn.eventManager = function(events) {
      var eventList = {}; // yeah this is the event list array
-     
-     // okay it's time to sorting !
+
+     // okay it's time to sort!
      for (globalSelector in events) {
         for (eventType in events[globalSelector]) {
            // we sort by events :)
@@ -13,7 +13,7 @@
               eventList[eventType] += ', '+globalSelector;
         }
      }
-     
+
      var $global = $(this); // the object container of the event list
 
      for (eventType in eventList) {
@@ -30,6 +30,6 @@
             }
         });
      }
-     return this; // no I won't break the chain !
+     return this; // no I won't break the chain!
    };
 })(jQuery);
