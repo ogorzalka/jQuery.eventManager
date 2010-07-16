@@ -20,9 +20,14 @@
       $global.delegate(eventList[eventType], eventType, function(e){
         for (globalSelector_p in events) {
           if ($(this).is(globalSelector_p)) {
-            for (selector_p in events[globalSelector_p][e.type]) {
-              if (($(this).is(selector_p) || selector_p == 'default') && typeof events[globalSelector_p][e.type][selector_p] != 'undefined')
-                events[globalSelector_p][e.type][selector_p](this, e, $global);
+            var selectors = events[globalSelector_p][e.type]
+            if (typeof selectors == 'function') {
+              selectors(this, e, $global)
+            } else {
+              for (selector_p in selectors) {
+                if (($(this).is(selector_p) || selector_p == 'default') && typeof selectors[selector_p] != 'undefined')
+                  selectors[selector_p](this, e, $global);
+              }
             }
           }
         }
