@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+  <title>eventManager tests</title>
+  <link href="css/style.css" rel="stylesheet" media="screen">
+  <script src="js/jquery.latest.js"></script>
+  <script src="js/eventManager.plugin.js"></script>
+  <script>
+    // list of all the events
+    var eventList = {   
+       // global-selector
+       'p' : {
+          // events
+          click: {  
+             // filtered selector 
+             '.testclass' : function (elem,event) {
+                alert('.testclass! attached event -> '+event.type);
+             },
+             
+             default : function () {
+                alert('this is the default event attached to the paragraph !');
+             }
+          }
+       },
+       
+       'input[type=text]' : {
+         change : {
+           default : function(elem) {
+             $(elem).data('modified',true);
+           }
+         },
+         focusin : {
+           default : function(elem) {
+             $(elem).prev().prev('legend').css('color','red');
+             if (!$(elem).data('modified')) {
+                $(elem)
+                  .data('val',$(elem).val())
+                  .val('');
+             }
+           }
+         },
+         focusout : {
+           default : function(elem) {
+             $(elem).prev().prev('legend').css('color','black');
+             if ($(elem).val() == '') {
+                $(elem)
+                  .val($(elem).data('val'))
+                  .data('val',$(elem).val())
+                  .data('modified',false)
+             }
+           }
+         }
+       },
+       
+       'form label' : {
+          mouseover : {
+            default : function(elem) {
+              $(elem).css('font-weight','bold');
+            }
+          },
+          mouseout : {
+            default : function(elem) {
+              $(elem).css('font-weight','normal');
+            }
+          }
+       },
+       
+       ':header' : {
+         mouseover: {
+           'h2' :  function(elem) {
+             $(elem).css('background-color','yellow');
+           },
+           'h3' :  function(elem) {
+             $(elem).stop().animate({'font-size':'2.5em'},500);
+           }
+         },
+         mouseout: {
+           'h3' :  function(elem) {
+             $(elem).stop().animate({'font-size':'1.6em'},500);
+           },
+           default : function(elem) {
+             $(elem).css('background-color','transparent');
+           }
+         }
+       },
+       
+       'div.code span' : {
+         click : {
+           default : function(elem) {
+             $(elem)
+              .text(($(elem).next('pre').is(':visible')) ? 'Show code' : 'Hide code')
+              .next('pre').toggle();
+           }
+         }
+       }
+    }
+    
+    $(document).ready(function() {
+      $('div.code pre').hide();
+      $('body').eventManager(eventList);
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <h1>Event tests</h1>
+    <h2>A title example (level 2)</h2>
+    <h3>Another title example (level 3)</h3>
+    
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          ':header' : {
+            mouseover: {
+              'h2' :  function(elem) {
+                $(elem).css('background-color','yellow');
+              },
+              'h3' :  function(elem) {
+                  $(elem).stop().animate({'font-size':'2.5em'},500);
+                }
+              },
+              mouseout: {
+                'h3' :  function(elem) {
+                  $(elem).stop().animate({'font-size':'1.6em'},500);
+              },
+              default : function(elem) {
+                $(elem).css('background-color','transparent');
+              }
+            }
+          }
+        })
+      </pre>
+    </div>
+    <p><strong>p</strong> event attached : click</p>
+    <p class="testclass"><strong>p.testclass &amp; p</strong> event attached : click</p>
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          'p' : {
+             click: {  
+                '.testclass' : function (elem,event) {
+                   alert('.testclass! attached event -> '+event.type);
+                },
+              
+                default : function () {
+                   alert('this is the default event attached to the paragraph !');
+                }
+             }
+          }
+        });
+      </pre>
+    </div>
+    
+    <form method="get" action="#">
+      <fieldset>
+        <legend>Form example</legend>
+        <label>Label test</label>
+        <input type="text" value="Enter your text" />
+      </fieldset>
+    </form>
+    
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          'input[type=text]' : {
+            change : {
+              default : function(elem) {
+                $(elem).data('modified',true);
+              }
+            },
+            focusin : {
+              default : function(elem) {
+                $(elem).prev().prev('legend').css('color','red');
+                if (!$(elem).data('modified')) {
+                   $(elem)
+                     .data('val',$(elem).val())
+                     .val('');
+                }
+              }
+            },
+            focusout : {
+              default : function(elem) {
+                $(elem).prev().prev('legend').css('color','black');
+                if ($(elem).val() == '') {
+                   $(elem)
+                     .val($(elem).data('val'))
+                     .data('val',$(elem).val())
+                     .data('modified',false)
+                }
+              }
+            }
+          },
+      
+          'form label' : {
+             mouseover : {
+               default : function(elem) {
+                 $(elem).css('font-weight','bold');
+               }
+             },
+             mouseout : {
+               default : function(elem) {
+                 $(elem).css('font-weight','normal');
+               }
+             }
+          }
+        });
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
