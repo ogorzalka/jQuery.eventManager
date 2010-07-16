@@ -24,6 +24,15 @@
           }
        },
        
+       '#treat-functions-as-default': {
+         mouseover: function(elem) {
+           $(elem).css('background-color', 'yellow')
+         },
+         mouseout: function(elem) {
+           $(elem).css('background-color', 'transparent')
+         }
+       },
+
        'input[type=text]' : {
          change : {
            default : function(elem) {
@@ -209,6 +218,22 @@
           }
         });
       </pre>
+    </div>
+
+
+    <div id="treat-functions-as-default">Treat functions as default</div>
+    <div class="code">
+      <span>Show code</span>
+      <pre>$('body').eventManager({
+  '#treat-functions-as-default': {
+    mouseover: function(elem) {
+      $(elem).css('background-color', 'yellow')
+    },
+    mouseout: function(elem) {
+      $(elem).css('background-color', 'transparent')
+    }
+  }
+});</pre>
     </div>
   </div>
 </body>
