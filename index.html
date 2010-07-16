@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>eventManager tests</title>
   <link href="css/style.css" rel="stylesheet" media="screen">
   <script src="js/jquery.latest.js"></script>
@@ -117,19 +118,19 @@
                 $(elem).css('background-color','yellow');
               },
               'h3' :  function(elem) {
-                  $(elem).stop().animate({'font-size':'2.5em'},500);
-                }
-              },
-              mouseout: {
-                'h3' :  function(elem) {
-                  $(elem).stop().animate({'font-size':'1.6em'},500);
+                $(elem).stop().animate({'font-size':'2.5em'},500);
+              }
+            },
+            mouseout: {
+              'h3' :  function(elem) {
+                $(elem).stop().animate({'font-size':'1.6em'},500);
               },
               default : function(elem) {
                 $(elem).css('background-color','transparent');
               }
             }
           }
-        })
+        });
       </pre>
     </div>
     <p><strong>p</strong> event attached : click</p>
