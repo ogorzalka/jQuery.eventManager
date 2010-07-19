@@ -7,10 +7,11 @@
     for (globalSelector in events) {
       for (eventType in events[globalSelector]) {
         // we sort by events :)
-        if (typeof eventList[eventType] == 'undefined')
+        if (typeof eventList[eventType] == 'undefined') {
           eventList[eventType] = globalSelector;
-        else
+        } else {
           eventList[eventType] += ', '+globalSelector;
+        }
       }
     }
 
@@ -20,13 +21,14 @@
       $global.delegate(eventList[eventType], eventType, function(e){
         for (globalSelector_p in events) {
           if ($(this).is(globalSelector_p)) {
-            var selectors = events[globalSelector_p][e.type]
+            var selectors = events[globalSelector_p][e.type];
             if (typeof selectors == 'function') {
-              selectors.call(this, e, $global)
+              selectors.call(this, e, $global);
             } else {
               for (selector_p in selectors) {
-                if (($(this).is(selector_p) || selector_p == 'default') && typeof selectors[selector_p] != 'undefined')
+                if (($(this).is(selector_p) || selector_p == 'default') && typeof selectors[selector_p] != 'undefined') {
                   selectors[selector_p].call(this, e, $global);
+                }
               }
             }
           }
