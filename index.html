@@ -14,7 +14,7 @@
           // events
           click: {
              // filtered selector
-             '.testclass' : function (elem,event) {
+             '.testclass' : function (event) {
                 alert('.testclass! attached event -> '+event.type);
              },
 
@@ -25,37 +25,37 @@
        },
 
        '#treat-functions-as-default': {
-         mouseover: function(elem) {
-           $(elem).css('background-color', 'yellow')
+         mouseover: function() {
+           $(this).css('background-color', 'yellow')
          },
-         mouseout: function(elem) {
-           $(elem).css('background-color', 'transparent')
+         mouseout: function() {
+           $(this).css('background-color', 'transparent')
          }
        },
 
        'input[type=text]' : {
          change : {
-           default : function(elem) {
-             $(elem).data('modified',true);
+           default : function() {
+             $(this).data('modified',true);
            }
          },
          focusin : {
-           default : function(elem) {
-             $(elem).prev().prev('legend').css('color','red');
-             if (!$(elem).data('modified')) {
-                $(elem)
-                  .data('val',$(elem).val())
+           default : function() {
+             $(this).prev().prev('legend').css('color','red');
+             if (!$(this).data('modified')) {
+                $(this)
+                  .data('val',$(this).val())
                   .val('');
              }
            }
          },
          focusout : {
-           default : function(elem) {
-             $(elem).prev().prev('legend').css('color','black');
-             if ($(elem).val() == '') {
-                $(elem)
-                  .val($(elem).data('val'))
-                  .data('val',$(elem).val())
+           default : function() {
+             $(this).prev().prev('legend').css('color','black');
+             if ($(this).val() == '') {
+                $(this)
+                  .val($(this).data('val'))
+                  .data('val',$(this).val())
                   .data('modified',false)
              }
            }
@@ -64,41 +64,41 @@
 
        'form label' : {
           mouseover : {
-            default : function(elem) {
-              $(elem).css('font-weight','bold');
+            default : function() {
+              $(this).css('font-weight','bold');
             }
           },
           mouseout : {
-            default : function(elem) {
-              $(elem).css('font-weight','normal');
+            default : function() {
+              $(this).css('font-weight','normal');
             }
           }
        },
 
        ':header' : {
          mouseover: {
-           'h2' :  function(elem) {
-             $(elem).css('background-color','yellow');
+           'h2' :  function() {
+             $(this).css('background-color','yellow');
            },
-           'h3' :  function(elem) {
-             $(elem).stop().animate({'font-size':'2.5em'},500);
+           'h3' :  function() {
+             $(this).stop().animate({'font-size':'2.5em'},500);
            }
          },
          mouseout: {
-           'h3' :  function(elem) {
-             $(elem).stop().animate({'font-size':'1.6em'},500);
+           'h3' :  function() {
+             $(this).stop().animate({'font-size':'1.6em'},500);
            },
-           default : function(elem) {
-             $(elem).css('background-color','transparent');
+           default : function() {
+             $(this).css('background-color','transparent');
            }
          }
        },
 
        'div.code span' : {
          click : {
-           default : function(elem) {
-             $(elem)
-              .text(($(elem).next('pre').is(':visible')) ? 'Show code' : 'Hide code')
+           default : function() {
+             $(this)
+              .text(($(this).next('pre').is(':visible')) ? 'Show code' : 'Hide code')
               .next('pre').toggle();
            }
          }
@@ -123,18 +123,18 @@
   ':header' : {
     mouseover: {
       'h2' :  function(elem) {
-        $(elem).css('background-color','yellow');
+        $(this).css('background-color','yellow');
       },
       'h3' :  function(elem) {
-        $(elem).stop().animate({'font-size':'2.5em'},500);
+        $(this).stop().animate({'font-size':'2.5em'},500);
       }
     },
     mouseout: {
       'h3' :  function(elem) {
-        $(elem).stop().animate({'font-size':'1.6em'},500);
+        $(this).stop().animate({'font-size':'1.6em'},500);
       },
       default : function(elem) {
-        $(elem).css('background-color','transparent');
+        $(this).css('background-color','transparent');
       }
     }
   }
@@ -173,26 +173,26 @@
   'input[type=text]' : {
     change : {
       default : function(elem) {
-        $(elem).data('modified',true);
+        $(this).data('modified',true);
       }
     },
     focusin : {
       default : function(elem) {
-        $(elem).prev().prev('legend').css('color','red');
-        if (!$(elem).data('modified')) {
-           $(elem)
-             .data('val',$(elem).val())
+        $(this).prev().prev('legend').css('color','red');
+        if (!$(this).data('modified')) {
+           $(this)
+             .data('val',$(this).val())
              .val('');
         }
       }
     },
     focusout : {
       default : function(elem) {
-        $(elem).prev().prev('legend').css('color','black');
-        if ($(elem).val() == '') {
-           $(elem)
-             .val($(elem).data('val'))
-             .data('val',$(elem).val())
+        $(this).prev().prev('legend').css('color','black');
+        if ($(this).val() == '') {
+           $(this)
+             .val($(this).data('val'))
+             .data('val',$(this).val())
              .data('modified',false)
         }
       }
@@ -202,12 +202,12 @@
   'form label' : {
      mouseover : {
        default : function(elem) {
-         $(elem).css('font-weight','bold');
+         $(this).css('font-weight','bold');
        }
      },
      mouseout : {
        default : function(elem) {
-         $(elem).css('font-weight','normal');
+         $(this).css('font-weight','normal');
        }
      }
   }
@@ -221,10 +221,10 @@
       <pre>$('body').eventManager({
   '#treat-functions-as-default': {
     mouseover: function(elem) {
-      $(elem).css('background-color', 'yellow')
+      $(this).css('background-color', 'yellow')
     },
     mouseout: function(elem) {
-      $(elem).css('background-color', 'transparent')
+      $(this).css('background-color', 'transparent')
     }
   }
 });</pre>
