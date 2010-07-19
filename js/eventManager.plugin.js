@@ -22,11 +22,11 @@
           if ($(this).is(globalSelector_p)) {
             var selectors = events[globalSelector_p][e.type];
             if (typeof selectors == 'function') {
-              return selectors.call(this, e, $global);
+              return selectors.apply(this, [e, $global]);
             } else {
               for (selector_p in selectors) {
                 if (($(this).is(selector_p) || selector_p == 'default') && typeof selectors[selector_p] != 'undefined') {
-                  return selectors[selector_p].call(this, e, $global);
+                  return selectors[selector_p].apply(this, [e, $global]);
                 }
               }
             }
