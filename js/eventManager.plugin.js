@@ -1,8 +1,9 @@
 ;(function($) {
   // Event Manager lets you organize your javascript events by using the power of the delegate method
   $.fn.eventManager = function(events) {
-    var eventList = {}; // yeah this is the event list array
-
+    var eventList = {}, // yeah this is the event list array
+        $global = $(this); // the object container of the event list
+    
     // okay it's time to sort!
     for (globalSelector in events) {
       for (eventType in events[globalSelector]) {
@@ -14,8 +15,6 @@
         }
       }
     }
-
-    var $global = $(this); // the object container of the event list
 
     for (eventType in eventList) {
       $global.delegate(eventList[eventType], eventType, function(e){
