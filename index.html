@@ -30,9 +30,11 @@
              // filtered selector
              '.test' : function (event) {
                 alert('.test! attached event -> '+event.type);
+                event.preventDefault()
              },
 
              default : function (event) {
+               alert('default event attached to the link');
                event.preventDefault()
              }
           }
