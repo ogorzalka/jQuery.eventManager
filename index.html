@@ -23,6 +23,20 @@
              }
           }
        },
+       
+       'a' : {
+          // events
+          click: {
+             // filtered selector
+             '.test' : function (event) {
+                alert('.test! attached event -> '+event.type);
+             },
+
+             default : function () {
+                return false;
+             }
+          }
+       },
 
        '#treat-functions-as-default': {
          mouseover: function() {
@@ -119,44 +133,48 @@
 
     <div class="code">
       <span>Show code</span>
-      <pre>$('body').eventManager({
-  ':header' : {
-    mouseover: {
-      'h2' :  function(elem) {
-        $(this).css('background-color','yellow');
-      },
-      'h3' :  function(elem) {
-        $(this).stop().animate({'font-size':'2.5em'},500);
-      }
-    },
-    mouseout: {
-      'h3' :  function(elem) {
-        $(this).stop().animate({'font-size':'1.6em'},500);
-      },
-      default : function(elem) {
-        $(this).css('background-color','transparent');
-      }
-    }
-  }
-});</pre>
+      <pre>
+        $('body').eventManager({
+          ':header' : {
+            mouseover: {
+              'h2' :  function(elem) {
+                $(this).css('background-color','yellow');
+              },
+              'h3' :  function(elem) {
+                $(this).stop().animate({'font-size':'2.5em'},500);
+              }
+            },
+            mouseout: {
+              'h3' :  function(elem) {
+                $(this).stop().animate({'font-size':'1.6em'},500);
+              },
+              default : function(elem) {
+                $(this).css('background-color','transparent');
+              }
+            }
+          }
+        });
+      </pre>
     </div>
     <p><strong>p</strong> event attached: click</p>
     <p class="testclass"><strong>p.testclass &amp; p</strong> event attached: click</p>
     <div class="code">
       <span>Show code</span>
-      <pre>$('body').eventManager({
-  'p' : {
-     click: {
-        '.testclass' : function (elem,event) {
-           alert('.testclass! attached event -> '+event.type);
-        },
+      <pre>
+        $('body').eventManager({
+          'p' : {
+             click: {
+                '.testclass' : function (elem,event) {
+                   alert('.testclass! attached event -> '+event.type);
+                },
 
-        default : function () {
-           alert('this is the default event attached to the paragraph !');
-        }
-     }
-  }
-});</pre>
+                default : function () {
+                   alert('this is the default event attached to the paragraph !');
+                }
+             }
+          }
+        });
+      </pre>
     </div>
 
     <form method="get" action="#">
@@ -169,65 +187,91 @@
 
     <div class="code">
       <span>Show code</span>
-      <pre>$('body').eventManager({
-  'input[type=text]' : {
-    change : {
-      default : function(elem) {
-        $(this).data('modified',true);
-      }
-    },
-    focusin : {
-      default : function(elem) {
-        $(this).prev().prev('legend').css('color','red');
-        if (!$(this).data('modified')) {
-           $(this)
-             .data('val',$(this).val())
-             .val('');
-        }
-      }
-    },
-    focusout : {
-      default : function(elem) {
-        $(this).prev().prev('legend').css('color','black');
-        if ($(this).val() == '') {
-           $(this)
-             .val($(this).data('val'))
-             .data('val',$(this).val())
-             .data('modified',false)
-        }
-      }
-    }
-  },
+      <pre>
+        $('body').eventManager({
+          'input[type=text]' : {
+            change : {
+              default : function(elem) {
+                $(this).data('modified',true);
+              }
+            },
+            focusin : {
+              default : function(elem) {
+                $(this).prev().prev('legend').css('color','red');
+                if (!$(this).data('modified')) {
+                   $(this)
+                     .data('val',$(this).val())
+                     .val('');
+                }
+              }
+            },
+            focusout : {
+              default : function(elem) {
+                $(this).prev().prev('legend').css('color','black');
+                if ($(this).val() == '') {
+                   $(this)
+                     .val($(this).data('val'))
+                     .data('val',$(this).val())
+                     .data('modified',false)
+                }
+              }
+            }
+          },
 
-  'form label' : {
-     mouseover : {
-       default : function(elem) {
-         $(this).css('font-weight','bold');
-       }
-     },
-     mouseout : {
-       default : function(elem) {
-         $(this).css('font-weight','normal');
-       }
-     }
-  }
-});</pre>
+          'form label' : {
+             mouseover : {
+               default : function(elem) {
+                 $(this).css('font-weight','bold');
+               }
+             },
+             mouseout : {
+               default : function(elem) {
+                 $(this).css('font-weight','normal');
+               }
+             }
+          }
+        });
+      </pre>
     </div>
 
 
-    <div id="treat-functions-as-default">Treat functions as default</div>
+    <p><a class="test" href="http://google.fr">Example of link</a></p>
     <div class="code">
       <span>Show code</span>
-      <pre>$('body').eventManager({
-  '#treat-functions-as-default': {
-    mouseover: function(elem) {
-      $(this).css('background-color', 'yellow')
-    },
-    mouseout: function(elem) {
-      $(this).css('background-color', 'transparent')
-    }
-  }
-});</pre>
+      <pre>
+        $('body').eventManager({
+          'a' : {
+             // events
+             click: {
+                // filtered selector
+                '.test' : function (event) {
+                   alert('.test! attached event -> '+event.type);
+                },
+
+                default : function () {
+                   return false;
+                }
+             }
+          }
+        });
+    </pre>
+    </div>
+
+    <div id="treat-functions-as-default"><p>Treat functions as default</p></div>
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          '#treat-functions-as-default': {
+            mouseover: function(elem) {
+              $(this).css('background-color', 'yellow')
+            },
+            mouseout: function(elem) {
+              $(this).css('background-color', 'transparent')
+            }
+          }
+        });
+      </pre>
     </div>
   </div>
 </body>
