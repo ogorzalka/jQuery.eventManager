@@ -22,7 +22,7 @@
           if ($(this).is(globalSelector_p)) {
             var selectors = events[globalSelector_p][e.type];
             if (typeof selectors == 'function') {
-              if (!selectors.apply(this, [e, $global]) === false) {
+              if (selectors.apply(this, [e, $global]) === false) {
                  return false;
               }
             } else {
