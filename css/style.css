@@ -79,6 +79,25 @@ span {
   margin-bottom:10px;
 }
 
+
+ul,
+li {
+  padding:0;
+  margin:0;
+}
+
+ul {
+  margin-bottom:10px;
+}
+
+li span {
+  display:inline;
+  font-size:1.0em;
+  cursor:inherit;
+  margin:0;
+  clear:none;
+}
+
 div.code {
   width:500px;
   padding:10px;

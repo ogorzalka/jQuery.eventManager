@@ -33,8 +33,43 @@
              },
 
              default : function () {
-                return false;
+               event.preventDefault()
              }
+          }
+       },
+       
+       'ul li' : {
+          // events
+          click: {
+            '.event4' : function () {
+               $(this).removeClass('event4').css('color','brown');
+            },
+            '.event3' : function () {
+               $(this)
+                 .css('color','red')
+                 .removeClass('event3')
+                 .addClass('event4');
+            },
+            '.event2' : function () {
+               $(this)
+                 .css('color','blue')
+                 .removeClass('event2')
+                 .addClass('event3');
+            },
+            '.event1' : function () {
+               $(this)
+                 .css('color','pink')
+                 .removeClass('event1')
+                 .addClass('event2')
+            },
+            default : function() {
+              if (this.className == '') {
+                $(this).addClass('event1');
+              }
+              if (!$(this).find('span').length)
+                $(this).append('<span />');
+              $(this).find('span').text(' (class applied : '+this.className+')');
+            }
           }
        },
 
@@ -156,6 +191,54 @@
         });
       </pre>
     </div>
+    
+    
+    <ul>
+      <li class="event1">Different events on the same object</li>
+    </ul>
+    
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          'ul li' : {
+             // events
+             click: {
+               '.event4' : function () {
+                  $(this).removeClass('event4').css('color','brown');
+               },
+               '.event3' : function () {
+                  $(this)
+                    .css('color','red')
+                    .removeClass('event3')
+                    .addClass('event4');
+               },
+               '.event2' : function () {
+                  $(this)
+                    .css('color','blue')
+                    .removeClass('event2')
+                    .addClass('event3');
+               },
+               '.event1' : function () {
+                  $(this)
+                    .css('color','pink')
+                    .removeClass('event1')
+                    .addClass('event2')
+               },
+               default : function() {
+                 if (this.className == '') {
+                   $(this).addClass('event1');
+                 }
+                 if (!$(this).find('span').length)
+                   $(this).append('<span />');
+                 $(this).find('span').text(' (class applied : '+this.className+')');
+               }
+             }
+          }
+        });
+      </pre>
+    </div>
+    
     <p><strong>p</strong> event attached: click</p>
     <p class="testclass"><strong>p.testclass &amp; p</strong> event attached: click</p>
     <div class="code">
