@@ -163,11 +163,6 @@
   <div>
     <h1>Event tests</h1>
     
-    <div class="testmouse">
-      <p><strong>Example with mouseenter and mouseleave</strong></p>
-      <small>(warning : only works with the next jquery 1.4.3, there's a bug with the returned event type)</small>
-    </div>
-    
     <h2>A title example (level 2)</h2>
     <h3>Another title example (level 3)</h3>
     
@@ -243,6 +238,27 @@
         });
       </pre>
     </div>
+    
+    <div class="testmouse">
+      <p><strong>Example with mouseenter and mouseleave</strong></p>
+      <small>(warning : only works with the next jquery 1.4.3, there's a bug with the returned event type)</small>
+    </div>
+    <div class="code">
+      <span>Show code</span>
+      <pre>
+        $('body').eventManager({
+          '.testmouse strong' : {
+            mouseenter : function() {
+              $(this).css('text-transform','uppercase');
+            },
+            mouseleave : function() {
+              $(this).css('text-transform','none');
+            }
+          }
+        });
+      </pre>
+    </div>
+    
     
     <p><strong>p</strong> event attached: click</p>
     <p class="testclass"><strong>p.testclass &amp; p</strong> event attached: click</p>
