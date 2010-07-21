@@ -17,8 +17,7 @@
              '.testclass' : function (event) {
                 alert('.testclass! attached event -> '+event.type);
              },
-
-             default : function () {
+             'default' : function () {
                 alert('this is the default event attached to the paragraph !');
              }
           }
@@ -33,7 +32,7 @@
                 event.preventDefault()
              },
 
-             default : function (event) {
+             'default' : function (event) {
                alert('default event attached to the link');
                event.preventDefault()
              }
@@ -65,7 +64,7 @@
                  .removeClass('event1')
                  .addClass('event2')
             },
-            default : function() {
+            'default' : function() {
               if (this.className == '')
                 $(this).addClass('event1');
 
@@ -128,7 +127,7 @@
            'h3' :  function() {
              $(this).stop().animate({'font-size':'1.6em'},500);
            },
-           default : function() {
+           'default' : function() {
              $(this).css('background-color','transparent');
            }
          }
@@ -154,8 +153,14 @@
     }
 
     $(document).ready(function() {
+      var optDebug = { debug : false };
+      try { 
+        console.log('init debug console... done');
+        optDebug.debug=true;
+      } catch(e) { console = { log: function() {} } }
+      
       $('div.code pre').hide();
-      $('body').eventManager(eventList);
+      $('body').eventManager(eventList,optDebug);
     });
   </script>
 </head>
@@ -230,7 +235,7 @@
                    $(this).addClass('event1');
                  }
                  if (!$(this).find('span').length)
-                   $(this).append('<span />');
+                   $(this).append('<span></span>');
                  $(this).find('span').text(' (class applied : '+this.className+')');
                }
              }
